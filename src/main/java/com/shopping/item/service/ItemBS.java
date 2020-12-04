@@ -19,7 +19,7 @@ public class ItemBS implements ItemBSI{
     @Override
     public Item getItemById(Long id) throws Exception {
         if(id != null) {
-            Optional<Item> opt = repository.findById(id.toString());
+            Optional<Item> opt = repository.findById(id);
             if(opt.isPresent()) {
                 return opt.get();
             }
