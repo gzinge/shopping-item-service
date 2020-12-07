@@ -3,6 +3,8 @@ package com.shopping.item.api;
 import com.shopping.item.model.Item;
 import com.shopping.item.model.ItemWrapper;
 import com.shopping.item.service.ItemBSI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/item")
 public class ItemRestController {
+
+    Logger logger = LoggerFactory.getLogger(ItemRestController.class);
 
     @Autowired
     private ItemBSI itemService;
@@ -25,6 +29,7 @@ public class ItemRestController {
             wrapper.setItemList(items);
             return new ResponseEntity<Object>(wrapper, HttpStatus.OK);
         } catch(Exception ex){
+            logger.error("Exception occurred while ", ex);
             return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -35,6 +40,7 @@ public class ItemRestController {
             Item item = itemService.getItemById(id);
             return new ResponseEntity<Object>(item, HttpStatus.OK);
         }catch (Exception ex){
+            logger.error("Exception occurred while ", ex);
             return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -48,6 +54,7 @@ public class ItemRestController {
             wrapper.setItemList(items);
             return new ResponseEntity<Object>(wrapper, HttpStatus.OK);
         }catch (Exception ex){
+            logger.error("Exception occurred while ", ex);
             return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -58,6 +65,7 @@ public class ItemRestController {
             int i = itemService.addItem(item);
             return new ResponseEntity<Object>("Item added Successfully", HttpStatus.CREATED);
         }catch (Exception ex){
+            logger.error("Exception occurred while ", ex);
             return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -68,6 +76,7 @@ public class ItemRestController {
             String ret = itemService.addMultipleItems(items);
             return new ResponseEntity<Object>(ret, HttpStatus.CREATED);
         }catch (Exception ex){
+            logger.error("Exception occurred while ", ex);
             return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -77,6 +86,7 @@ public class ItemRestController {
             int i = itemService.updateItem(item);
             return new ResponseEntity<Object>("Item Update Successfully", HttpStatus.CREATED);
         }catch (Exception ex){
+            logger.error("Exception occurred while ", ex);
             return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -87,6 +97,7 @@ public class ItemRestController {
             int i = itemService.removeItemById(id);
             return new ResponseEntity<Object>("Item Removed Successfully", HttpStatus.OK);
         }catch (Exception ex){
+            logger.error("Exception occurred while ", ex);
             return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -97,6 +108,7 @@ public class ItemRestController {
             int i = itemService.removeAll();
             return new ResponseEntity<Object>("All Items Removed Successfully", HttpStatus.OK);
         }catch (Exception ex){
+            logger.error("Exception occurred while ", ex);
             return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

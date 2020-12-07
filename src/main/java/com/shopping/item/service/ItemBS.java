@@ -2,6 +2,8 @@ package com.shopping.item.service;
 
 import com.shopping.item.model.Item;
 import com.shopping.item.repository.ItemRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class ItemBS implements ItemBSI{
+
+    Logger logger = LoggerFactory.getLogger(ItemBS.class);
 
     @Autowired
     private ItemRepository repository;
